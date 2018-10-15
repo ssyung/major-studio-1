@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+    </head>
+    <body onresize = 'window.location.reload(true)'>
+        Global Electricity Access 
+    <body>
+        <script>
+            // load data
+            d3.csv("SE4ALLData.csv").then((data) => {
+                data = data.filter((data) => { return data["Indicator Code"] === "1.1_ACCESS.ELECTRICITY.TOT"}); //filter access to electricity data
+                data = data.filter((data) => { return data["2016"] !== ""}) //filter out missing data
+                data.forEach((d) => {
+                    d["2016"] = +d["2016"]; // convert string data to numeric data
+                });
+                data = data.filter((data) => { return data["2016"] < 100}) //filter out countries with 100% access
+                svg(data);
+                console.log(data);
+            });
+
+            // function to generate svg when data source is loaded
+            let svg = (data) => {
+                
+                let graph = d3.select("body")
+                    .append("svg")
+                    .attr("width", window.innerWidth)
+                    .attr("height", window.innerHeight)
+                    .style("background-color", "black")
+                    .style("font-family", "sans-serif")
+                    .style("font-size", "5px")
+                    
+                let modal = graph
+                    .append('g')
+                    .attr('id', 'modal');
+                    
+                let group = graph
+                    .append('g')
+                    .attr('id', 'group');
+                    
+                let bars = group.selectAll('g') // bind data to g
+                    .data(data) // .data d3 method
+                    .enter() // join -- bind each data entry to a g in the DOM
+                    .append('g')
+                    .attr('transform', (d, i) => { // data payload and iterator
+                        return `translate(${i * window.innerWidth/data.length}, 0)`
+                    })
+                    .attr('cat', (d, i) => {return d["2016"]})
+                    .style('fill', 'gold')
+                    
+                    .on('mouseover', function(d) { // call back function mouseover effect
+                        d3.select(this)
+                            .select('text')
+                            .text( (d) => {
+                                return `${d["2016"]}%`;
+                            })
+                        d3.select(this)
+                            .select('#output')
+                            .style('fill', 'gray')
+                    })
+                    .on('mouseout', function(d) {
+                        d3.select(this)
+                            .select('text')
+                            .text( (d) => {
+                                return d["Country Name"];
+                            })
+                        d3.select(this)
+                            .select('#output')
+                            .style('fill', 'gold')
+                    })
+                    
+                    // visual bar
+                    bars.append('rect')
+                        .attr('width', window.innerWidth/data.length) // TO DO
+                        .attr('height', (d, i) => {return d["2016"]/100*window.innerHeight}) // TO DO
+                        // .attr('x', (d, i) => {
+                        //     return i + (window.innerWidth/data.length)
+                        // })
+                        .attr('y', (d, i) => {
+                            return window.innerHeight-d["2016"]/100*window.innerHeight
+                        })
+                        .attr('id', 'output');         
+                        
+                    // text label
+                    bars.append('text')
+                        .text((d) => {return d["Country Name"];})
+                        .attr('transform', (d, i) => {
+                            return `translate(${window.innerWidth/data.length}, ${window.innerHeight}) rotate(-90)`
+                        })
+                        .style('fill','black');     
+                    
+            }
+            
+        </script>
+    </body>
+</html>
