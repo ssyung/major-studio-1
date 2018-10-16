@@ -15,6 +15,9 @@
                     d["2016"] = +d["2016"]; // convert string data to numeric data
                 });
                 data = data.filter((data) => { return data["2016"] < 100}) //filter out countries with 100% access
+                data.sort((a,b) => {
+                    return a["2016"] < b["2016"]; // sort in descending order
+                })
                 svg(data);
                 console.log(data);
             });
@@ -28,7 +31,7 @@
                     .attr("height", window.innerHeight)
                     .style("background-color", "black")
                     .style("font-family", "sans-serif")
-                    .style("font-size", "10px")
+                    .style("font-size", window.innerWidth/data.length + "px");
                     
                 let modal = graph
                     .append('g')
