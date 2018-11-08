@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> World Governance Indicators - Sub-Saharan Africa</title>
+        
+        <!-- Google fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+		<script src="radarChart.js"></script>	
+        
+		<style>
+    		body {
+    			font-family: 'Open Sans', sans-serif;
+    			font-size: 11px;
+    			font-weight: 300;
+    			fill: #242424;
+    			text-align: center;
+    			text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+    			cursor: default;
+    		}
+    		
+    		.legend {
+    			font-family: 'Raleway', sans-serif;
+    			fill: #333333;
+    		}
+    		
+    		.tooltip {
+    			fill: #333333;
+    		}
+    		.chartwrapper {
+    		    display: inline-block;
+    		    margin-top: 20px;
+    		}
+		</style>
+    </head>
+    <body>
+        
+		<div id="charts"></div>
+		
+		<script>
+		/* global d3 */
+		/* global RadarChart */
+		var color = d3.scaleOrdinal()
+		    .range(["#EDC951","#CC333F","#00A0B0"]); 
+				
+		var radarChartOptions = {
+		  w: Math.max(100, window.innerWidth / 10.0),
+		  h: Math.max(100, window.innerHeight / 10.0),
+		  margin: {top: 40, right: 40, bottom: 40, left: 40},
+		  maxValue: 2.5,
+		  minValue: -2.5,
+		  levels: 10,
+		  roundStrokes: true,
+		  dotRadius: 2,
+		  strokeWidth: 1,
+		  color: color
+		};
+        d3.csv("wgi_2017_ssa.csv").then((data) => {
+            data.forEach((d) => {
+                let divIdName = 'rdr'+d["Code"];
+                let divWrapEl = document.createElement('div');
+                divWrapEl.className = 'chartwrapper';
+                divWrapEl.innerHTML = '<strong>'+d['Country']+'</strong>';
+                
+                
+                let divEl = document.createElement('div');
+                divEl.setAttribute('id', divIdName);
+                
+                divWrapEl.appendChild(divEl);
+                
+                let chartsEl = document.getElementById('charts');
+                chartsEl.appendChild(divWrapEl);
+                
+                let data = [[
+                    {axis:"Voice and Accountability",value:d["voiceAcc"]},
+                    {axis:"Political Stability",value:d["politicalSta"]},
+                    {axis:"Government Effectiveness",value:d["govEff"]},
+                    {axis:"Regulatory Quality",value:d["regQua"]},
+                    {axis:"Rule of Law",value:d["ruleLaw"]},
+                    {axis:"Control of Corruption",value:d["controlCor"]}
+                ]];
+                
+                // d["voiceAcc"] = +d["voiceAcc"];
+                // d["politicalSta"] = +d["politicalSta"];
+                // d["govEff"] = +d["govEff"];
+                // d["regQua"] = +d["regQua"];
+                // d["ruleLaw"] = +d["ruleLaw"];
+                // d["controlCor"] = +d["controlCor"];
+                
+                RadarChart('#'+divIdName, data, radarChartOptions);
+            });
+            console.log(data);
+        });
+
+		</script>
+
+    </body>
+</html>
