@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> World Governance Indicators - Sub-Saharan Africa</title>
+        <title> World Governance Indicators - Africa</title>
         
         <!-- Google fonts -->
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Alegreya+Sans' rel='stylesheet' type='text/css'>
 
         <script src="https://d3js.org/d3.v5.min.js"></script>
 		<script src="radarChart.js"></script>	
         
 		<style>
     		body {
-    			font-family: 'Open Sans', sans-serif;
+    			font-family: 'Alegreya Sans', sans-serif;
     			font-size: 11px;
     			font-weight: 300;
-    			fill: #242424;
     			text-align: center;
     			text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
     			cursor: default;
+    			background: #F3EBDD;
     		}
     		
     		.legend {
-    			font-family: 'Raleway', sans-serif;
-    			fill: #333333;
+    			font-family: 'Alegreya Sans', sans-serif;
+    			fill: #A65A46;
     		}
     		
     		.tooltip {
-    			fill: #333333;
+    			fill: #A65A46;
     		}
     		.chartwrapper {
     		    display: inline-block;
@@ -43,7 +42,7 @@
 		/* global d3 */
 		/* global RadarChart */
 		var color = d3.scaleOrdinal()
-		    .range(["#EDC951","#CC333F","#00A0B0"]); 
+		    .range(["#A65A46","#CC333F","#E8E3DD"]); 
 				
 		var radarChartOptions = {
 		  w: Math.max(100, window.innerWidth / 10.0),

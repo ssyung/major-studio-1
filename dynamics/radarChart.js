@@ -16,10 +16,10 @@ function RadarChart(id, data, options) {
 	 minValue: 0, 			//What is the value that the smallest circle (center) will represent
 	 labelFactor: 1.25, 	//How much farther than the radius of the outer circle should the labels be placed
 	 wrapWidth: 20, 		//The number of pixels after which a label needs to be given a new line
-	 opacityArea: 0.35, 	//The opacity of the area of the blob
+	 opacityArea: 0.5,  	//The opacity of the area of the blob
 	 dotRadius: 2, 			//The size of the colored circles of each blog
 	 opacityCircles: 0.2, 	//The opacity of the circles of each blob
-	 strokeWidth: 2, 		//The width of the stroke around each blob
+	 strokeWidth: 1, 		//The width of the stroke around each blob
 	 roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
 	 color: d3.scaleOrdinal(d3.schemePurples[-2.5,5])	//Color function
 	};
@@ -60,17 +60,6 @@ function RadarChart(id, data, options) {
 	//Append a g element		
 	var g = svg.append("g")
 			.attr("transform", "translate(" + (cfg.w/2 + cfg.margin.left) + "," + (cfg.h/2 + cfg.margin.top) + ")");
-	
-	/////////////////////////////////////////////////////////
-	////////// Glow filter for some extra pizzazz ///////////
-	/////////////////////////////////////////////////////////
-	
-	// //Filter for the outside glow
-	// var filter = g.append('defs').append('filter').attr('id','glow'),
-	// 	feGaussianBlur = filter.append('feGaussianBlur').attr('stdDeviation','2.5').attr('result','coloredBlur'),
-	// 	feMerge = filter.append('feMerge'),
-	// 	feMergeNode_1 = feMerge.append('feMergeNode').attr('in','coloredBlur'),
-	// 	feMergeNode_2 = feMerge.append('feMergeNode').attr('in','SourceGraphic');
 
 	/////////////////////////////////////////////////////////
 	/////////////// Draw the Circular grid //////////////////
@@ -86,8 +75,8 @@ function RadarChart(id, data, options) {
 		.append("circle")
 		.attr("class", "gridCircle")
 		.attr("r", function(d, i){return radius/cfg.levels*d;})
-		.style("fill", "#CDCDCD")
-		.style("stroke", "#CDCDCD")
+		.style("fill", "#E8E3DD")
+		.style("stroke", "#E8E3DD")
 		.style("fill-opacity", cfg.opacityCircles)
 		// .style("filter" , "url(#glow)");
 
@@ -120,8 +109,8 @@ function RadarChart(id, data, options) {
 		.attr("x2", function(d, i){ return rScale(maxValue*1.1) * Math.cos(angleSlice*i - Math.PI/2); })
 		.attr("y2", function(d, i){ return rScale(maxValue*1.1) * Math.sin(angleSlice*i - Math.PI/2); })
 		.attr("class", "line")
-		.style("stroke", "white")
-		.style("stroke-width", "2px");
+		.style("stroke", "#999999")
+		.style("stroke-width", ".25px");
 
 	//Append the labels at each axis
 	axis.append("text")
@@ -185,7 +174,7 @@ function RadarChart(id, data, options) {
 		.style("stroke-width", cfg.strokeWidth + "px")
 		.style("stroke", function(d,i) { return cfg.color(i); })
 		.style("fill", "none")
-		.style("filter" , "url(#glow)");		
+		// .style("filter" , "url(#glow)");		
 	
 	//Append the circles
 	blobWrapper.selectAll(".radarCircle")
