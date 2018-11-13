@@ -88,6 +88,10 @@
                 // d["ruleLaw"] = +d["ruleLaw"];
                 // d["controlCor"] = +d["controlCor"];
                 
+                data.sort((a,b) => {
+                    return d3.ascending(a.Country, b.Country);
+                })
+                
                 RadarChart('#'+divIdName, data, radarChartOptions);
             });
             console.log(data);
