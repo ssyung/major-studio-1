@@ -16,12 +16,14 @@ function RadarChart(id, data, options) {
 	 minValue: 0, 			//What is the value that the smallest circle (center) will represent
 	 labelFactor: 1.25, 	//How much farther than the radius of the outer circle should the labels be placed
 	 wrapWidth: 20, 		//The number of pixels after which a label needs to be given a new line
-	 opacityArea: 0.5,  	//The opacity of the area of the blob
+	 opacityArea: 0,  	//The opacity of the area of the blob
 	 dotRadius: 2, 			//The size of the colored circles of each blog
-	 opacityCircles: 0.2, 	//The opacity of the circles of each blob
+	 opacityCircles: 1, 	//The opacity of the circles of each blob
 	 strokeWidth: 1, 		//The width of the stroke around each blob
 	 roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
-	 color: d3.scaleOrdinal(d3.schemePurples[-2.5,5])	//Color function
+	 color: d3.scaleOrdinal()
+		.domain([1])
+		.range(["#BF5041"])	//Color function
 	};
 	
 	//Put all of the options into a variable called cfg
@@ -113,15 +115,15 @@ function RadarChart(id, data, options) {
 		.style("stroke-width", ".25px");
 
 	//Append the labels at each axis
-	axis.append("text")
-		.attr("class", "legend")
-		.style("font-size", "5px")
-		.attr("text-anchor", "middle")
-		.attr("dy", "0.35em")
-		.attr("x", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
-		.attr("y", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice*i - Math.PI/2); })
-		.text(function(d){return d})
-		.call(wrap, cfg.wrapWidth);
+	// axis.append("text")
+	// 	.attr("class", "legend")
+	// 	.style("font-size", "5px")
+	// 	.attr("text-anchor", "middle")
+	// 	.attr("dy", "0.35em")
+	// 	.attr("x", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
+	// 	.attr("y", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice*i - Math.PI/2); })
+	// 	.text(function(d){return d})
+	// 	.call(wrap, cfg.wrapWidth);
 
 	/////////////////////////////////////////////////////////
 	///////////// Draw the radar chart blobs ////////////////
@@ -129,12 +131,12 @@ function RadarChart(id, data, options) {
 	
 	//The radial line function
 	var radarLine = d3.radialLine()
-		// .interpolate("linear-closed")
+    	.curve(d3.curveLinearClosed)
 		.radius(function(d) { return rScale(d.value); })
 		.angle(function(d,i) {	return i*angleSlice; });
 		
 	if(cfg.roundStrokes) {
-		// radarLine.interpolate("cardinal-closed");
+		radarLine.curve(d3.curveLinearClosed);
 	}
 				
 	//Create a wrapper for the blobs	
@@ -154,7 +156,7 @@ function RadarChart(id, data, options) {
 			//Dim all blobs
 			d3.selectAll(".radarArea")
 				.transition().duration(200)
-				.style("fill-opacity", 0.2); 
+				.style("fill-opacity", 0); 
 			//Bring back the hovered over blob
 			d3.select(this)
 				.transition().duration(200)
@@ -217,10 +219,22 @@ function RadarChart(id, data, options) {
 				.text(Format(d.value))
 				.transition().duration(200)
 				.style('opacity', 1);
+				
+			// Append the labels at each axis
+			axis.append("text")
+				.attr("class", "legend")
+				.style("font-size", "5px")
+				.attr("text-anchor", "middle")
+				.attr("dy", "0.35em")
+				.attr("x", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
+				.attr("y", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice*i - Math.PI/2); })
+				.text(function(d){return d})
+				.call(wrap, cfg.wrapWidth);
 		})
 		.on("mouseout", function(){
-			tooltip.transition().duration(200)
+			tooltip.transition().duration(100)
 				.style("opacity", 0);
+			axis.text.remove();
 		});
 		
 	//Set up the small tooltip for when you hover over a circle

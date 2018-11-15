@@ -4,7 +4,7 @@
         <title> World Governance Indicators - Africa</title>
         
         <!-- Google fonts -->
-		<link href='https://fonts.googleapis.com/css?family=Alegreya+Sans' rel='stylesheet' type='text/css'>
+		<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i" rel="stylesheet">
 
         <script src="https://d3js.org/d3.v5.min.js"></script>
 		<script src="radarChart.js"></script>	
@@ -13,9 +13,8 @@
     		body {
     			font-family: 'Alegreya Sans', sans-serif;
     			font-size: 11px;
-    			font-weight: 300;
+    			color: #A65A46;
     			text-align: center;
-    			text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
     			cursor: default;
     			background: #F3EBDD;
     		}
@@ -36,6 +35,8 @@
     </head>
     <body>
         
+        Renewable Energy and World Governance Indicators
+        
 		<div id="charts"></div>
 		
 		<script>
@@ -45,14 +46,13 @@
 		    .range(["#A65A46","#CC333F","#E8E3DD"]); 
 				
 		var radarChartOptions = {
-		  w: Math.max(100, window.innerWidth / 10.0),
-		  h: Math.max(100, window.innerHeight / 10.0),
-		  margin: {top: 40, right: 40, bottom: 40, left: 40},
+		  w: Math.max(70, window.innerWidth / 10.0),
+		  h: Math.max(70, window.innerHeight / 10.0),
+		  margin: {top: 15, right: 15, bottom: 15, left: 15},
 		  maxValue: 2.5,
 		  minValue: -2.5,
-		  levels: 10,
-		  roundStrokes: true,
-		  dotRadius: 2,
+		  levels: 0,
+		  dotRadius: 1.5,
 		  strokeWidth: 1,
 		  color: color
 		};
@@ -62,7 +62,6 @@
                 let divWrapEl = document.createElement('div');
                 divWrapEl.className = 'chartwrapper';
                 divWrapEl.innerHTML = '<strong>'+d['Country']+'</strong>';
-                
                 
                 let divEl = document.createElement('div');
                 divEl.setAttribute('id', divIdName);
