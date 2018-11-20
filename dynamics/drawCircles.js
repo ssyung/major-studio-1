@@ -5,8 +5,8 @@ function drawCircles(id,data) {
 			.attr('width',  110)
 			.attr('height', 110);
 			
-	//log scale
-	var logScale = d3.scaleLog()
+	//linear scale
+	var linearScale = d3.scaleLinear()
 	  .domain([1, 5000])
 	  .range([0, 30]);
 
@@ -14,11 +14,11 @@ function drawCircles(id,data) {
 	svg.append('circle')
 		.attr('cy', 55)
 		.attr('cx', 55)
-		.attr('r', logScale(data.capacity))
+		.attr('r', linearScale(data.capacity))
 		.style('fill', "#6F8B59")
 		.style('opacity',0.3)
 	
-	console.log(logScale(data.capacity))
+	// console.log(linearScale(data.capacity))
 		
 	// //Append a g element		
 	// var circleGrid = svg.append("g")
