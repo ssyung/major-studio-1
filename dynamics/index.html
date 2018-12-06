@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> World Governance Indicators - Africa</title>
+        <title>Renewable Energy and Good Governance</title>
         
         <!-- Google fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i" rel="stylesheet">
@@ -67,8 +67,13 @@
     <body>
         
         <h1>
-        Renewable Energy and World Governance Indicators
+        Renewable Energy and Good Governance
         </h1>
+        
+        <p1>
+        Governance consists of the traditions and institutions by which authority in a country is exercised.  This includes the process by which governments are selected, monitored and replaced; the capacity of the government to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.
+        Achieving a sustainable energy future requires a revolution in worldwide energy systems. This type of energy transformation is not possible without strong and coherent governance.
+        </p1>
         
 		<div id="charts"></div>
 		
@@ -91,9 +96,9 @@
 		};
 		
         d3.csv("wgi_irena_ssa.csv").then((data) => {
-            data.sort((a,b) => {
-                return d3.ascending(a.Country, b.Country);
-            })
+            // data.sort((a,b) => {
+            //     return d3.ascending(a.Country, b.Country);
+            // })
                 
             data.forEach((d) => {
                 let divIdName = 'rdr'+d["Code"];

@@ -8,7 +8,7 @@ function drawCircles(id,data) {
 	//linear scale
 	var linearScale = d3.scaleLinear()
 	  .domain([1, 5000])
-	  .range([0, 30]);
+	  .range([0, 50]);
 
 			
 	svg.append('circle')
