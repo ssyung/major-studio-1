@@ -13,7 +13,7 @@
 		<style>
     		body {
     			font-family: 'Alegreya Sans', sans-serif;
-    			font-size: 11px;
+    			font-size: 14px;
     			color: #A65A46;
     			cursor: default;
     			background: #F3EBDD;
@@ -71,9 +71,13 @@
         </h1>
         
         <p1>
-        Governance consists of the traditions and institutions by which authority in a country is exercised.  This includes the process by which governments are selected, monitored and replaced; the capacity of the government to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.
-        Achieving a sustainable energy future requires a revolution in worldwide energy systems. This type of energy transformation is not possible without strong and coherent governance.
-        </p1>
+The resource curse, also known as the paradox of plenty, refers to the paradox that countries with an abundance of natural resources tend to have less economic growth, less democracy, and worse development outcomes than countries with fewer natural resources.
+
+<br>Does the "resource curse" apply to renewable energy? 
+
+<br>Visually pairing World Governance Indicators with renewable energy potential, a pattern interplay leads to further lines of inquiry:
+<br>- countries with weak World Governance Indicators and high renewable energy potential may have a higher susceptability to the resource curse (Sudan, Somalia, Democratic Republic of Congo)
+<br>- countries with strong World Governance Indicators and high renewable energy potential may be strong candidates for renewable energy pilot projects (South Africa, Tanzania, Botswana)        </p1>
         
 		<div id="charts"></div>
 		
@@ -128,7 +132,8 @@
                 RadarChart('#'+divIdName, wgiData, radarChartOptions);
                 
                 let irenaData = {
-                    capacity: d["Capacity"]
+                    potential: d["potential"],
+                    capacity: d["capacity"]
                 };
                 
                 // console.log(irenaData);

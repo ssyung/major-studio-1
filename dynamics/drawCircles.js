@@ -5,19 +5,19 @@ function drawCircles(id,data) {
 			.attr('width',  110)
 			.attr('height', 110);
 			
-	//linear scale
-	var linearScale = d3.scaleLinear()
-	  .domain([1, 5000])
-	  .range([0, 50]);
 
-			
-	svg.append('circle')
-		.attr('cy', 55)
-		.attr('cx', 55)
-		.attr('r', linearScale(data.capacity))
-		.style('fill', "#6F8B59")
-		.style('opacity',0.3)
-	
+	//linear scale
+	 var linearScale = d3.scaleLinear()
+	   .domain([1, 180])
+	   .range([0, 50]);
+
+	 svg.append('circle')
+	  .attr('cy', 55)
+	  .attr('cx', 55)
+	  .attr('r', linearScale(Math.sqrt(data.potential/Math.PI)))
+	  .style('fill', "#6F8B59")
+	  .style('opacity',0.3)
+
 	// console.log(linearScale(data.capacity))
 		
 	// //Append a g element		
