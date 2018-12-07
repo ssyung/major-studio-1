@@ -224,7 +224,7 @@ function RadarChart(id, data, options) {
 			// Append the labels at each axis
 			axis.append("text")
 				.attr("class", "legend")
-				.style("font-size", "14px")
+				.style("font-size", "12px")
 				.style("fill", "#a8382d")
 				.attr("text-anchor", "middle")
 				.attr("dy", "0.35em")
@@ -242,7 +242,7 @@ function RadarChart(id, data, options) {
 	//Set up the small tooltip for when you hover over a circle
 	var tooltip = g.append("text")
 		.attr("class", "tooltip")
-		.style("font-size", "14px")
+		.style("font-size", "12px")
 		.style("opacity", 0);
 	
 	/////////////////////////////////////////////////////////
