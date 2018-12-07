@@ -2,21 +2,33 @@ function drawCircles(id,data) {
     
     //Initiate the SVG
 	var svg = d3.select(id).append('svg')
-			.attr('width',  110)
-			.attr('height', 110);
+			.attr('width',  150)
+			.attr('height', 150);
 			
 
 	//linear scale
-	 var linearScale = d3.scaleLinear()
+	 var potlinearScale = d3.scaleLinear()
 	   .domain([1, 180])
-	   .range([0, 50]);
+	   .range([0, 75]);
+	   
+	 var caplinearScale = d3.scaleLinear()
+	   .domain([1, 40])
+	   .range([0, 25]);
 
 	 svg.append('circle')
-	  .attr('cy', 55)
-	  .attr('cx', 55)
-	  .attr('r', linearScale(Math.sqrt(data.potential/Math.PI)))
-	  .style('fill', "#6F8B59")
-	  .style('opacity',0.3)
+	  .attr('cy', 80)
+	  .attr('cx', 80)
+	  .attr('r', potlinearScale(Math.sqrt(data.potential/Math.PI)))
+	  .style('fill', "#f0d9a6")
+	  .style('opacity',0.7)
+
+	 svg.append('circle')
+	  .attr('cy', 80)
+	  .attr('cx', 80)
+	  .attr('r', caplinearScale(Math.sqrt(data.capacity/Math.PI)))
+	  .style('fill', "#bcc1a0")
+	  .style('opacity',0.7)
+
 
 	// console.log(linearScale(data.capacity))
 		

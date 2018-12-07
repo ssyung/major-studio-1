@@ -13,32 +13,34 @@
 		<style>
     		body {
     			font-family: 'Alegreya Sans', sans-serif;
-    			font-size: 14px;
-    			color: #A65A46;
+    			font-size: 16px;
+    			color: #a8382d;
     			cursor: default;
     			background: #F3EBDD;
     		}
     		
     		h1 {
-    		    font-size: 24px;
+    		    font-size: 26px;
     		    font-weight: normal;
     		    margin-bottom: 5px;
     		}
     		
     		.legend {
     			font-family: 'Alegreya Sans', sans-serif;
-    			fill: #A65A46;
+    			fill: #a8382d;
+    			font-size: 14px !important;
     		}
     		
     		.tooltip {
-    			fill: #A65A46;
+    			fill: #a8382d;
+    			font-size: 14px !important;
     		}
     		.chartwrapper {
     		    display: inline-block;
     		    margin-top: 10px;
     		    position: relative;
-    		    min-width: 100px;
-    		    min-height: 115px;
+    		    min-width: 150px;
+    		    min-height: 165px;
     		}
     		
     		.chartwrapper > .country_label {
@@ -51,8 +53,8 @@
     		    display: block;
     		}
     		.circles {
-    		    width: 100px;
-    		    height: 115px;
+    		    width: 150px;
+    		    height: 165px;
     		    position: absolute;
     		    top: 0px;
     		    left: 0;
@@ -88,8 +90,8 @@ The resource curse, also known as the paradox of plenty, refers to the paradox t
 		    .range(["#A65A46","#CC333F","#E8E3DD"]); 
 				
 		var radarChartOptions = {
-		  w: 80, //Math.max(70, window.innerWidth / 10.0),
-		  h: 80, //Math.max(70, window.innerHeight / 10.0),
+		  w: 130, //Math.max(70, window.innerWidth / 10.0),
+		  h: 130, //Math.max(70, window.innerHeight / 10.0),
 		  margin: {top: 15, right: 15, bottom: 15, left: 15},
 		  maxValue: 2.5,
 		  minValue: -2.5,
@@ -104,7 +106,8 @@ The resource curse, also known as the paradox of plenty, refers to the paradox t
             //     return d3.ascending(a.Country, b.Country);
             // })
                 
-            data.forEach((d) => {
+            data.forEach((d, idx) => {
+                if (idx === 0) return;
                 let divIdName = 'rdr'+d["Code"];
                 let divWrapEl = document.createElement('div');
                 
@@ -133,7 +136,7 @@ The resource curse, also known as the paradox of plenty, refers to the paradox t
                 
                 let irenaData = {
                     potential: d["potential"],
-                    capacity: d["capacity"]
+                    capacity: d["Capacity"]
                 };
                 
                 // console.log(irenaData);
