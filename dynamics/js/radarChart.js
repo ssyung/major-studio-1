@@ -219,12 +219,13 @@ function RadarChart(id, data, options) {
 				.text(Format(d.value))
 				.transition().duration(100)
 				.style('opacity', 1)
-				.style("fill", function(d,i,j) { return cfg.color(2); });
+				.style("fill", "#a8382d");
 				
 			// Append the labels at each axis
 			axis.append("text")
 				.attr("class", "legend")
-				.style("font-size", "5px")
+				.style("font-size", "14px")
+				.style("fill", "#a8382d")
 				.attr("text-anchor", "middle")
 				.attr("dy", "0.35em")
 				.attr("x", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
@@ -241,7 +242,7 @@ function RadarChart(id, data, options) {
 	//Set up the small tooltip for when you hover over a circle
 	var tooltip = g.append("text")
 		.attr("class", "tooltip")
-		.style("font-size", "8px")
+		.style("font-size", "14px")
 		.style("opacity", 0);
 	
 	/////////////////////////////////////////////////////////
