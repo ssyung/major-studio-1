@@ -4,7 +4,7 @@
 ////////////////// VisualCinnamon.com ///////////////////
 /////////// Inspired by the code of alangrafu ///////////
 /////////////////////////////////////////////////////////
-
+/* global d3 */
 
 function RadarChart(id, data, options) {
 	var cfg = {
@@ -15,12 +15,12 @@ function RadarChart(id, data, options) {
 	 maxValue: 0, 			//What is the value that the biggest circle will represent
 	 minValue: 0, 			//What is the value that the smallest circle (center) will represent
 	 labelFactor: 1.25, 	//How much farther than the radius of the outer circle should the labels be placed
-	 wrapWidth: 20, 		//The number of pixels after which a label needs to be given a new line
+	 wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
 	 opacityArea: 0,  	//The opacity of the area of the blob
 	 dotRadius: 2, 			//The size of the colored circles of each blog
 	 opacityCircles: 1, 	//The opacity of the circles of each blob
 	 strokeWidth: 1, 		//The width of the stroke around each blob
-	 roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
+	 roundStrokes: true,	//If true the area and stroke will follow a round path (cardinal-closed)
 	 color: d3.scaleOrdinal()
 		.domain([1,2])
 		.range(["#BF5041", "#A65A46"])	//Color function
@@ -224,7 +224,7 @@ function RadarChart(id, data, options) {
 			// Append the labels at each axis
 			axis.append("text")
 				.attr("class", "legend")
-				.style("font-size", "12px")
+				.style("font-size", "14px")
 				.style("fill", "#a8382d")
 				.attr("text-anchor", "middle")
 				.attr("dy", "0.35em")
@@ -242,7 +242,7 @@ function RadarChart(id, data, options) {
 	//Set up the small tooltip for when you hover over a circle
 	var tooltip = g.append("text")
 		.attr("class", "tooltip")
-		.style("font-size", "12px")
+		.style("font-size", "14px")
 		.style("opacity", 0);
 	
 	/////////////////////////////////////////////////////////

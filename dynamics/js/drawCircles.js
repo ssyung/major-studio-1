@@ -2,8 +2,8 @@ function drawCircles(id,data) {
     
     //Initiate the SVG
 	var svg = d3.select(id).append('svg')
-			.attr('width',  150)
-			.attr('height', 150);
+			.attr('width',  260)
+			.attr('height', 260);
 			
 
 	//linear scale
@@ -16,15 +16,15 @@ function drawCircles(id,data) {
 	   .range([0, 25]);
 
 	 svg.append('circle')
-	  .attr('cy', 80)
-	  .attr('cx', 80)
+	  .attr('cy', 130)
+	  .attr('cx', 130)
 	  .attr('r', potlinearScale(Math.sqrt(data.potential/Math.PI)))
 	  .style('fill', "#f0d9a6")
 	  .style('opacity',0.7)
 
 	 svg.append('circle')
-	  .attr('cy', 80)
-	  .attr('cx', 80)
+	  .attr('cy', 130)
+	  .attr('cx', 130)
 	  .attr('r', caplinearScale(Math.sqrt(data.capacity/Math.PI)))
 	  .style('fill', "#bcc1a0")
 	  .style('opacity',0.7)

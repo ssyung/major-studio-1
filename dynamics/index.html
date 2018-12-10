@@ -31,12 +31,15 @@
     			cursor: default;
     			background: #F3EBDD;
     		}
+    		#charts {
+    		  text-align: center;
+    		}
     		.chartwrapper {
     		    display: inline-block;
     		    margin-top: 10px;
     		    position: relative;
-    		    min-width: 150px;
-    		    min-height: 165px;
+    		    min-width: 260px;
+    		    min-height: 285px;
     		}
     		
     		.chartwrapper > .country_label {
@@ -49,8 +52,8 @@
     		    display: block;
     		}
     		.circles {
-    		    width: 150px;
-    		    height: 165px;
+    		    width: 260px;
+    		    height: 260px;
     		    position: absolute;
     		    top: 0px;
     		    left: 0;
@@ -91,7 +94,7 @@
     <header class="bg-dark text-white">
       <div class="container text-center">
         <h1>Renewable Energy and Good Governance</h1>
-        <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
+        <p class="lead"></p>
       </div>
     </header>
 
@@ -115,10 +118,12 @@
       </div>
     </section>
 
+<!-- ADD new section for LEGEND, displaying just sample country [0] with text, might need functionality to "blow up" yellow potential circle? -->  
+
     <section id="visualization" class="bg-light">
       <div class="container">
         <div class="row">
-          <div class="col-lg-10 mx-auto">
+          <div class="col-lg-12 mx-auto">
             <h1>Visualization</h1>
             <div id="charts"></div>
 		
@@ -129,13 +134,13 @@
 		    .range(["#A65A46","#CC333F","#E8E3DD"]); 
 				
 		var radarChartOptions = {
-		  w: 130, //Math.max(70, window.innerWidth / 10.0),
-		  h: 130, //Math.max(70, window.innerHeight / 10.0),
-		  margin: {top: 15, right: 15, bottom: 15, left: 15},
+		  w: 180, //Math.max(70, window.innerWidth / 10.0),
+		  h: 180, //Math.max(70, window.innerHeight / 10.0),
+		  margin: {top: 40, right: 40, bottom: 40, left: 40},
 		  maxValue: 2.5,
 		  minValue: -2.5,
 		  levels: 0,
-		  dotRadius: 1.5,
+		  dotRadius: 2,
 		  strokeWidth: 1,
 		  color: color
 		};
@@ -146,7 +151,7 @@
             // })
                 
             data.forEach((d, idx) => {
-                if (idx === 0) return;
+                if (idx === 0) return; // ignore the first example country
                 let divIdName = 'rdr'+d["Code"];
                 let divWrapEl = document.createElement('div');
                 
@@ -168,7 +173,7 @@
                     {axis:"Government Effectiveness",value:d["govEff"]},
                     {axis:"Regulatory Quality",value:d["regQua"]},
                     {axis:"Rule of Law",value:d["ruleLaw"]},
-                    {axis:"Control of Corruption",value:d["controlCor"]}
+                    {axis:"Control of Corruption",value:d["controlCor"]},
                 ]]
                 
                 RadarChart('#'+divIdName, wgiData, radarChartOptions);
@@ -177,8 +182,6 @@
                     potential: d["potential"],
                     capacity: d["Capacity"]
                 };
-                
-                // console.log(irenaData);
                 
                 drawCircles('#cir'+d['Code'], irenaData);
                 
@@ -191,6 +194,10 @@
         </div>
       </div>
     </section>
+
+<!-- ADD new section for Group1, displaying just Sudan, Dem Rep Congo, Somalia with text --> 
+
+<!-- ADD new section for Group2, displaying just South Africa, Tanzania, Kenya with text --> 
 
     <section id="sources">
       <div class="container">
