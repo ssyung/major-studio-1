@@ -127,30 +127,30 @@
             <h1>Visualization</h1>
             <div id="charts"></div>
 		
-		<script>
-		/* global d3 */
-		/* global RadarChart */
-		var color = d3.scaleOrdinal()
-		    .range(["#A65A46","#CC333F","#E8E3DD"]); 
-				
-		var radarChartOptions = {
-		  w: 180, //Math.max(70, window.innerWidth / 10.0),
-		  h: 180, //Math.max(70, window.innerHeight / 10.0),
-		  margin: {top: 40, right: 40, bottom: 40, left: 40},
-		  maxValue: 2.5,
-		  minValue: -2.5,
-		  levels: 0,
-		  dotRadius: 2,
-		  strokeWidth: 1,
-		  color: color
-		};
-		
-        d3.csv("wgi_irena_ssa.csv").then((data) => {
-            // data.sort((a,b) => {
-            //     return d3.ascending(a.Country, b.Country);
-            // })
-                
-            data.forEach((d, idx) => {
+        		<script>
+        		/* global d3 */
+        		/* global RadarChart */
+        		var color = d3.scaleOrdinal()
+        		    .range(["#A65A46","#CC333F","#E8E3DD"]); 
+        				
+        		var radarChartOptions = {
+        		  w: 180, //Math.max(70, window.innerWidth / 10.0),
+        		  h: 180, //Math.max(70, window.innerHeight / 10.0),
+        		  margin: {top: 40, right: 40, bottom: 40, left: 40},
+        		  maxValue: 2.5,
+        		  minValue: -2.5,
+        		  levels: 0,
+        		  dotRadius: 2,
+        		  strokeWidth: 1,
+        		  color: color
+        		};
+        		
+            d3.csv("wgi_irena_ssa.csv").then((data) => {
+              // data.sort((a,b) => {
+              //     return d3.ascending(a.Country, b.Country);
+              // })
+                    
+              data.forEach((d, idx) => {
                 if (idx === 0) return; // ignore the first example country
                 let divIdName = 'rdr'+d["Code"];
                 let divWrapEl = document.createElement('div');
@@ -166,30 +166,30 @@
                 
                 let chartsEl = document.getElementById('charts');
                 chartsEl.appendChild(divWrapEl);
-                
+                  
                 let wgiData = [[
-                    {axis:"Voice and Accountability",value:d["voiceAcc"]},
-                    {axis:"Political Stability",value:d["politicalSta"]},
-                    {axis:"Government Effectiveness",value:d["govEff"]},
-                    {axis:"Regulatory Quality",value:d["regQua"]},
-                    {axis:"Rule of Law",value:d["ruleLaw"]},
-                    {axis:"Control of Corruption",value:d["controlCor"]},
+                  {axis:"Voice and Accountability",value:d["voiceAcc"]},
+                  {axis:"Political Stability",value:d["politicalSta"]},
+                  {axis:"Government Effectiveness",value:d["govEff"]},
+                  {axis:"Regulatory Quality",value:d["regQua"]},
+                  {axis:"Rule of Law",value:d["ruleLaw"]},
+                  {axis:"Control of Corruption",value:d["controlCor"]},
                 ]]
-                
+                  
                 RadarChart('#'+divIdName, wgiData, radarChartOptions);
-                
+                  
                 let irenaData = {
                     potential: d["potential"],
                     capacity: d["Capacity"]
                 };
                 
                 drawCircles('#cir'+d['Code'], irenaData);
-                
+                  
+              });
+              console.log(data);
             });
-            console.log(data);
-        });
-
-		</script>
+    
+    		    </script>
           </div>
         </div>
       </div>
