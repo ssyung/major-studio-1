@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Renewable Energy and Good Governance</title>
+    <title>Renewable Energy and Good Governance in Africa</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,10 +19,9 @@
         <!-- Google fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i" rel="stylesheet">
 
-        <script src="https://d3js.org/d3.v5.min.js"></script>
-		<script src="js/radarChart.js"></script>	
-		<script src="js/drawCircles.js"></script>	
-        
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+		<script src="js/energyChart.js"></script>
+    
 		<style>
     		body {
     			font-family: 'Alegreya Sans', sans-serif;
@@ -34,34 +33,18 @@
     		#charts {
     		  text-align: center;
     		}
-    		.chartwrapper {
+    		a:link {
+    		  color:#943128;
+    		}
+    		a:visited {
+    		  color:#6c241d;
+    		}
+    		a:hover {
+    		  color:#bc3f32;
+    		}
+    		.chartDiv {
     		    display: inline-block;
     		    margin-top: 10px;
-    		    position: relative;
-    		    min-width: 260px;
-    		    min-height: 285px;
-    		}
-    		
-    		.chartwrapper > .country_label {
-    		    position: absolute;
-    		    bottom: 0;
-    		    width: 100%;
-    		    height: 20px;
-    		    left: 0;
-    		    text-align: center;
-    		    display: block;
-    		}
-    		.circles {
-    		    width: 260px;
-    		    height: 260px;
-    		    position: absolute;
-    		    top: 0px;
-    		    left: 0;
-    		}
-    		.actual_chart {
-    		    position: absolute;
-    		    top:0px;
-    		    left: 0;
     		}
 		</style>
   </head>
@@ -71,7 +54,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Renewable Energy and Good Governance</a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Renewable Energy and Good Governance in Africa</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -93,7 +76,7 @@
 
     <header class="bg-dark text-white">
       <div class="container text-center">
-        <h1>Renewable Energy and Good Governance</h1>
+        <h1>Renewable Energy and Good Governance in Africa</h1>
         <p class="lead"></p>
       </div>
     </header>
@@ -108,10 +91,10 @@
             
             <h2>Does the "resource curse" apply to renewable energy? </h2>
             
-            <p>Visually pairing World Governance Indicators with renewable energy potential, a pattern interplay leads to further lines of inquiry:</p>
+            <p>Visually pairing World Governance Indicators with renewable energy potential, the emerging pattern interplay leads to further lines of inquiry:</p>
             <ul>
-                <li>countries with weak World Governance Indicators and high renewable energy potential may have a higher susceptability to the resource curse (Sudan, Somalia, Democratic Republic of Congo)</li>
-                <li>countries with strong World Governance Indicators and high renewable energy potential may be strong candidates for renewable energy pilot projects (South Africa, Tanzania, Botswana)</li>
+                <li>Do countries with weak World Governance Indicators and high renewable energy potential have a higher susceptability to the resource curse?</li>
+                <li>Are countries with strong World Governance Indicators and high renewable energy potential strong candidates for renewable energy pilot projects?</li>
             </ul>
           </div>
         </div>
@@ -120,71 +103,41 @@
 
 <!-- ADD new section for LEGEND, displaying just sample country [0] with text, might need functionality to "blow up" yellow potential circle? -->  
 
-    <section id="visualization" class="bg-light">
-      <div class="container">
+    <section id="visualization" style="background-color:#faf7f1">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12 mx-auto">
-            <h1>Visualization</h1>
             <div id="charts"></div>
 		
         		<script>
         		/* global d3 */
-        		/* global RadarChart */
-        		var color = d3.scaleOrdinal()
-        		    .range(["#A65A46","#CC333F","#E8E3DD"]); 
-        				
-        		var radarChartOptions = {
-        		  w: 180, //Math.max(70, window.innerWidth / 10.0),
-        		  h: 180, //Math.max(70, window.innerHeight / 10.0),
-        		  margin: {top: 40, right: 40, bottom: 40, left: 40},
-        		  maxValue: 2.5,
-        		  minValue: -2.5,
-        		  levels: 0,
-        		  dotRadius: 2,
-        		  strokeWidth: 1,
-        		  color: color
-        		};
-        		
+        		/* global energyChart */
+		
             d3.csv("wgi_irena_ssa.csv").then((data) => {
-              // data.sort((a,b) => {
-              //     return d3.ascending(a.Country, b.Country);
-              // })
-                    
               data.forEach((d, idx) => {
                 if (idx === 0) return; // ignore the first example country
-                let divIdName = 'rdr'+d["Code"];
-                let divWrapEl = document.createElement('div');
-                
-                divWrapEl.className = 'chartwrapper';
-                divWrapEl.innerHTML = '<div class="circles" id="cir'+d['Code']+'"></div><strong class="country_label">'+d['Country']+'</strong>';
-                
-                let divEl = document.createElement('div');
-                divEl.setAttribute('id', divIdName);
-                divEl.setAttribute('class', 'actual_chart');
-                
-                divWrapEl.appendChild(divEl);
                 
                 let chartsEl = document.getElementById('charts');
-                chartsEl.appendChild(divWrapEl);
                   
-                let wgiData = [[
-                  {axis:"Voice and Accountability",value:d["voiceAcc"]},
-                  {axis:"Political Stability",value:d["politicalSta"]},
-                  {axis:"Government Effectiveness",value:d["govEff"]},
-                  {axis:"Regulatory Quality",value:d["regQua"]},
-                  {axis:"Rule of Law",value:d["ruleLaw"]},
-                  {axis:"Control of Corruption",value:d["controlCor"]},
-                ]]
-                  
-                RadarChart('#'+divIdName, wgiData, radarChartOptions);
-                  
-                let irenaData = {
+                let rowData = {
+                  radar: [[
+                    {axis:"Voice and Accountability",value:d["voiceAcc"]},
+                    {axis:"Political Stability",value:d["politicalSta"]},
+                    {axis:"Government Effectiveness",value:d["govEff"]},
+                    {axis:"Regulatory Quality",value:d["regQua"]},
+                    {axis:"Rule of Law",value:d["ruleLaw"]},
+                    {axis:"Control of Corruption",value:d["controlCor"]},
+                  ]],
+                  circle: {
                     potential: d["potential"],
                     capacity: d["Capacity"]
-                };
-                
-                drawCircles('#cir'+d['Code'], irenaData);
-                  
+                  }
+                }
+                let chartDiv = energyChart(rowData);
+                let countryName = document.createElement('div');
+                countryName.innerHTML = '<strong>'+d['Country']+'</strong>';
+                chartDiv.appendChild(countryName);
+                chartsEl.appendChild(chartDiv);
               });
               console.log(data);
             });
@@ -197,14 +150,16 @@
 
 <!-- ADD new section for Group1, displaying just Sudan, Dem Rep Congo, Somalia with text --> 
 
-<!-- ADD new section for Group2, displaying just South Africa, Tanzania, Kenya with text --> 
+<!-- ADD new section for Group2, displaying just South Africa, Namibia, Botswana with text --> 
 
     <section id="sources">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Sources</h2>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor, provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae ipsa exercitationem, in, quo totam.</p>
+            <p><a href="http://info.worldbank.org/governance/wgi/#home">World Governance Indicators</a></p>
+            <p><a href="https://www.irena.org/publications/2014/Aug/Estimating-the-Renewable-Energy-Potential-in-Africa-A-GIS-based-approach">IRENA: Estimating Renwable Energy Potential in Africa, August 2014</a></p>
+            <p><a href="https://www.irena.org/publications/2018/Mar/Renewable-Capacity-Statistics-2018">IRENA: Renewable Capacity Statistics, March 2018</a></p>
           </div>
         </div>
       </div>
@@ -213,7 +168,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">A data visualization project by Stephanie Yung, M.S. Data Visualization Major Studio I 2018, The New School</p>
+        <p class="m-0 text-center text-white">A data visualization project by Stephanie Yung, M.S. Data Visualization // Major Studio I 2018 // The New School</p>
       </div>
       <!-- /.container -->
     </footer>
