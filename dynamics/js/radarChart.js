@@ -71,15 +71,15 @@ function RadarChart(id, data, options) {
 	var axisGrid = g.append("g").attr("class", "axisWrapper");
 	
 	//Draw the background circles
-	axisGrid.selectAll(".levels")
-	   .data(d3.range(1,(cfg.levels+1)).reverse())
-	   .enter()
-		.append("circle")
-		.attr("class", "gridCircle")
-		.attr("r", function(d, i){return radius/cfg.levels*d;})
-		.style("fill", "#E8E3DD")
-		.style("stroke", "#E8E3DD")
-		.style("fill-opacity", cfg.opacityCircles)
+	// axisGrid.selectAll(".levels")
+	//   .data(d3.range(1,(cfg.levels+1)).reverse())
+	//   .enter()
+	// 	.append("circle")
+	// 	.attr("class", "gridCircle")
+	// 	.attr("r", function(d, i){return radius/cfg.levels*d;})
+	// 	.style("fill", "#E8E3DD")
+	// 	.style("stroke", "#E8E3DD")
+	// 	.style("fill-opacity", cfg.opacityCircles)
 		// .style("filter" , "url(#glow)");
 
 	//Text indicating at what % each level is
