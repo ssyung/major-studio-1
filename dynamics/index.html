@@ -51,6 +51,12 @@
     		  display: block;
     		  margin: 0 auto;
     		}
+    		.navTitle {
+    		  display: none;
+    		}
+    		.showNavTitle .navTitle {
+    		  display: inline;
+    		}
 		</style>
   </head>
 
@@ -59,7 +65,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Renewable Energy and Good Governance in Africa</a>
+        <a class="navbar-brand js-scroll-trigger navTitle" href="#page-top">Renewable Energy and Good Governance in Africa</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -69,7 +75,16 @@
               <a class="nav-link js-scroll-trigger" href="#overview">Overview</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#legend">Legend</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#visualization">Visualization</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#group1">Group 1</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#group2">Group 2</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#sources">Sources</a>
@@ -90,7 +105,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
-            <h1>Overview</h1>
+            <h1>Introduction</h1>
             
             <p>The resource curse, also known as the paradox of plenty, refers to the paradox that countries with an abundance of natural resources tend to have less economic growth, less democracy, and worse development outcomes than countries with fewer natural resources.</p>
             
@@ -113,7 +128,17 @@
             <div id="exampleChart" class="dupChartWrapper"></div>
           </div>
           <div class="col-md-6">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce scelerisque, ligula ac condimentum mollis, eros neque dapibus elit, vitae hendrerit eros quam at nisi. Vivamus venenatis placerat cursus. Donec quis sapien neque. Sed eget enim faucibus erat vulputate vestibulum cursus in nisl. Donec in vehicula augue, non pharetra diam. Nullam eget finibus est. Phasellus ut tellus euismod diam ultricies viverra. Phasellus a faucibus libero.
+            <h1>Legend</h1>
+            <p>Each country element of the visualization maps several data points:
+            <ul>
+              <li>Each of the six axes maps one dimension of the World Governance Indicators<sup>1</sup>, in units ranging from -2.5 to 2.5: Voice and Accountability, Political Stability, Government Effectiveness, Regulatory Quality, Rule of Law, and Control of Corruption </li>
+              <li>The yellow circle maps estimated renewable energy potential<sup>2</sup>, in terawatts</li>
+              <li>The yellow circle maps reported renewable energy installed capacity<sup>3</sup>, in megawatts</li>
+            </ul>
+            </p>
+
+            <p>Africa's renewable energy potential is vast (1 terawatt = 1,000,000 megawatts) - mapping this in comparison with installed capacity has visual limits. In order to visualize this relationship, the renewable energy potential area is scaled to be 4x the area of the installed capacity.
+            </p>
           </div>
         </div>
       </div>
@@ -130,15 +155,17 @@
     </section>
 
 
-    <section id="group1">
+    <section id="group1" style="background-color:#faf7f1"; "margin-top: 50px"; "margin-bottom: 50px">
       <div class="container text-center">
         <div class="row">
           <div class="col-lg-12">
             <div id="group1Charts"></div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-10 mx-auto">Nunc pellentesque dolor quam, quis fringilla purus fringilla convallis. Pellentesque feugiat justo eu enim venenatis, quis porta nibh finibus. Vestibulum pharetra augue ut ullamcorper ornare. Nullam eu egestas arcu, ac tempor lacus. Phasellus porttitor erat sagittis sodales euismod. Duis vitae blandit arcu. Vivamus facilisis elit vulputate, ultricies ipsum a, dapibus magna. Sed interdum, sem aliquam dapibus vestibulum, turpis turpis tincidunt lorem, vitae commodo ex lectus quis nulla. Duis urna nisi, consectetur eu leo ac, porta euismod nisi. Suspendisse finibus urna finibus fringilla consequat.</div>
+        <div class="row" style="margin-top: 20px">
+          <div class="col-lg-8 mx-auto text-left">
+            <p>Sudan, Somalia and Democratic Republic of Congo share relatively low World Governance Indicator scores and high renewable energy potential. Sudan and Congo have modest renewable energy capacity, while Somalia has none. Comparing the individual indicator axes, Somalia is weaker than Sudan and Democratic Republic of Congo in Rule of Law, Regulatory Quality and Government Effectiveness. In all three countries, Political Stability ranks very low. All three countries have a pronounced indicator "jaggedness" - scores across the six axes fluctuate and distort the resulting shape when the axes are connected.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -147,24 +174,26 @@
     <section id="group2">
       <div class="container text-center">
         <div class="row">
-          <div class="col-lg-7">
+          <div class="col-lg-12">
             <div id="group2Charts"></div>
           </div>
-          <div class="col-lg-5">
-            Etiam tristique, erat vel volutpat ullamcorper, leo urna elementum ante, quis egestas magna turpis nec libero. Integer eleifend tellus at erat vehicula consequat. Etiam feugiat urna sed dui lacinia, sit amet viverra nulla fermentum. Nullam leo tellus, viverra non felis vitae, pulvinar feugiat metus. In fringilla, massa ut vestibulum vestibulum, metus leo finibus arcu, non aliquam neque erat a ante. Sed aliquet tempus massa, id tempus tortor rutrum nec. Integer quis commodo lacus, ultricies pellentesque massa. Sed vulputate tellus vel rutrum feugiat. Aliquam rutrum lectus eget quam mattis, at dictum urna tristique. Nunc ut placerat lectus, vel cursus ante. Integer non iaculis ipsum. Maecenas fermentum fermentum libero, a iaculis ex bibendum sed.
+          <div class="row" style="margin-top: 20px">
+            <div class="col-lg-8 mx-auto text-left">
+              <p> South Africa, Namibia and Botswana all rank strongly across most of the World Governance Indicators and all have a relative indicator evenness. All three countries have fairly high renewable energy potential, but only South Africa has a meaningul installed renewable energy capacity. No immediate relationships are evident between the individual indicators and lack of renewable energy capacity in Namibia and Botswana, but these countries may prove to be strong candidates for renewable energy projects.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="sources">
+    <section id="sources" style="background-color:#faf7f1">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Sources</h2>
-            <p><a href="http://info.worldbank.org/governance/wgi/#home">World Governance Indicators</a></p>
-            <p><a href="https://www.irena.org/publications/2014/Aug/Estimating-the-Renewable-Energy-Potential-in-Africa-A-GIS-based-approach">IRENA: Estimating Renwable Energy Potential in Africa, August 2014</a></p>
-            <p><a href="https://www.irena.org/publications/2018/Mar/Renewable-Capacity-Statistics-2018">IRENA: Renewable Capacity Statistics, March 2018</a></p>
+            <p><sup>1</sup><a href="http://info.worldbank.org/governance/wgi/#home">World Governance Indicators</a></p>
+            <p><sup>2</sup><a href="https://www.irena.org/publications/2014/Aug/Estimating-the-Renewable-Energy-Potential-in-Africa-A-GIS-based-approach">IRENA: Estimating Renwable Energy Potential in Africa, August 2014</a></p>
+            <p><sup>3</sup><a href="https://www.irena.org/publications/2018/Mar/Renewable-Capacity-Statistics-2018">IRENA: Renewable Capacity Statistics, March 2018</a></p>
           </div>
         </div>
       </div>
@@ -189,6 +218,10 @@
     <script src="js/scrolling-nav.js"></script>
     <script>
       jQuery(function($) { // jQuery domready
+        /* global d3 */
+    		/* global energyChart */
+    		
+    		
         // function resizeSections() {
         //   // set heights for sections
         //   $('section, .section').css('min-height', $(window).height() + 'px')
@@ -199,8 +232,14 @@
         // resizeSections()
         
         
-        /* global d3 */
-    		/* global energyChart */
+    		$(window).on('scroll', function() {
+    		  if ($(window).scrollTop() > 120) {
+    		    $('body').addClass('showNavTitle');
+    		  } else {
+    		    $('body').removeClass('showNavTitle');
+    		  }
+    		});
+    		
     		
     		// empty array collectors for later sections
     		var group1 = [];

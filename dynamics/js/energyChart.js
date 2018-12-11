@@ -96,11 +96,11 @@ var energyChart = function(rowData) {
 	
 	//linear scale
   var potlinearScale = d3.scaleLinear()
-    .domain([1, 180])
+    .domain([0, 180])
     .range([0, 100]);
 	   
   var caplinearScale = d3.scaleLinear()
-    .domain([1, 40])
+    .domain([0, 40])
     .range([0, 25]);
 
   g.append('circle')
