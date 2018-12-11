@@ -110,6 +110,7 @@ var energyChart = function(rowData) {
 			tooltip
 				.attr('x', 0)
 				.attr('y', -potlinearScale(Math.sqrt(circleData.potential/Math.PI)))
+				.attr("text-anchor", "middle")
 				.text(circleData.potential + ' TW')
 				.transition().duration(100)
 				.style('opacity', 1);
@@ -128,6 +129,7 @@ var energyChart = function(rowData) {
 			tooltip
 				.attr('x', 0)
 				.attr('y', -caplinearScale(Math.sqrt(circleData.capacity/Math.PI)))
+				.attr("text-anchor", "middle")
 				.text(circleData.capacity + ' MW')
 				.transition().duration(100)
 				.style('opacity', 1);
