@@ -28,7 +28,7 @@
     			font-size: 16px;
     			color: #a8382d;
     			cursor: default;
-    			background: #F3EBDD;
+    			background: #f7f3ea;
     		}
     		#charts {
     		  text-align: center;
@@ -45,6 +45,11 @@
     		.chartDiv {
     		    display: inline-block;
     		    margin-top: 10px;
+    		    text-align: center;
+    		}
+    		.dupChartWrapper {
+    		  display: block;
+    		  margin: 0 auto;
     		}
 		</style>
   </head>
@@ -74,7 +79,7 @@
       </div>
     </nav>
 
-    <header class="bg-dark text-white">
+    <header class="bg-dark text-white section">
       <div class="container text-center">
         <h1>Renewable Energy and Good Governance in Africa</h1>
         <p class="lead"></p>
@@ -101,56 +106,56 @@
       </div>
     </section>
 
-<!-- ADD new section for LEGEND, displaying just sample country [0] with text, might need functionality to "blow up" yellow potential circle? -->  
-
-    <section id="visualization" style="background-color:#faf7f1">
-      <div class="container-fluid">
+    <section id="legend" style="background-color:#faf7f1">
+      <div class="container">
         <div class="row">
-          <div class="col-lg-12 mx-auto">
-            <div id="charts"></div>
-		
-        		<script>
-        		/* global d3 */
-        		/* global energyChart */
-		
-            d3.csv("wgi_irena_ssa.csv").then((data) => {
-              data.forEach((d, idx) => {
-                if (idx === 0) return; // ignore the first example country
-                
-                let chartsEl = document.getElementById('charts');
-                  
-                let rowData = {
-                  radar: [[
-                    {axis:"Voice and Accountability",value:d["voiceAcc"]},
-                    {axis:"Political Stability",value:d["politicalSta"]},
-                    {axis:"Government Effectiveness",value:d["govEff"]},
-                    {axis:"Regulatory Quality",value:d["regQua"]},
-                    {axis:"Rule of Law",value:d["ruleLaw"]},
-                    {axis:"Control of Corruption",value:d["controlCor"]},
-                  ]],
-                  circle: {
-                    potential: d["potential"],
-                    capacity: d["Capacity"]
-                  }
-                }
-                let chartDiv = energyChart(rowData);
-                let countryName = document.createElement('div');
-                countryName.innerHTML = '<strong>'+d['Country']+'</strong>';
-                chartDiv.appendChild(countryName);
-                chartsEl.appendChild(chartDiv);
-              });
-              console.log(data);
-            });
-    
-    		    </script>
+          <div class="col-md-6">
+            <div id="exampleChart" class="dupChartWrapper"></div>
+          </div>
+          <div class="col-md-6">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce scelerisque, ligula ac condimentum mollis, eros neque dapibus elit, vitae hendrerit eros quam at nisi. Vivamus venenatis placerat cursus. Donec quis sapien neque. Sed eget enim faucibus erat vulputate vestibulum cursus in nisl. Donec in vehicula augue, non pharetra diam. Nullam eget finibus est. Phasellus ut tellus euismod diam ultricies viverra. Phasellus a faucibus libero.
           </div>
         </div>
       </div>
     </section>
 
-<!-- ADD new section for Group1, displaying just Sudan, Dem Rep Congo, Somalia with text --> 
+    <section id="visualization">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12 mx-auto">
+            <div id="charts"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- ADD new section for Group2, displaying just South Africa, Namibia, Botswana with text --> 
+
+    <section id="group1">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-12">
+            <div id="group1Charts"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-10 mx-auto">Nunc pellentesque dolor quam, quis fringilla purus fringilla convallis. Pellentesque feugiat justo eu enim venenatis, quis porta nibh finibus. Vestibulum pharetra augue ut ullamcorper ornare. Nullam eu egestas arcu, ac tempor lacus. Phasellus porttitor erat sagittis sodales euismod. Duis vitae blandit arcu. Vivamus facilisis elit vulputate, ultricies ipsum a, dapibus magna. Sed interdum, sem aliquam dapibus vestibulum, turpis turpis tincidunt lorem, vitae commodo ex lectus quis nulla. Duis urna nisi, consectetur eu leo ac, porta euismod nisi. Suspendisse finibus urna finibus fringilla consequat.</div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <section id="group2">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-7">
+            <div id="group2Charts"></div>
+          </div>
+          <div class="col-lg-5">
+            Etiam tristique, erat vel volutpat ullamcorper, leo urna elementum ante, quis egestas magna turpis nec libero. Integer eleifend tellus at erat vehicula consequat. Etiam feugiat urna sed dui lacinia, sit amet viverra nulla fermentum. Nullam leo tellus, viverra non felis vitae, pulvinar feugiat metus. In fringilla, massa ut vestibulum vestibulum, metus leo finibus arcu, non aliquam neque erat a ante. Sed aliquet tempus massa, id tempus tortor rutrum nec. Integer quis commodo lacus, ultricies pellentesque massa. Sed vulputate tellus vel rutrum feugiat. Aliquam rutrum lectus eget quam mattis, at dictum urna tristique. Nunc ut placerat lectus, vel cursus ante. Integer non iaculis ipsum. Maecenas fermentum fermentum libero, a iaculis ex bibendum sed.
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="sources">
       <div class="container">
@@ -182,7 +187,77 @@
 
     <!-- Custom JavaScript for this theme -->
     <script src="js/scrolling-nav.js"></script>
+    <script>
+      jQuery(function($) { // jQuery domready
+        // function resizeSections() {
+        //   // set heights for sections
+        //   $('section, .section').css('min-height', $(window).height() + 'px')
+          
+        //   // adjust height of header section text to be in the middle.
+        //   $('header.section h1').css('margin-top', $('header.section').height() * 0.4);
+        // }
+        // resizeSections()
+        
+        
+        /* global d3 */
+    		/* global energyChart */
+    		
+    		// empty array collectors for later sections
+    		var group1 = [];
+    		var group2 = [];
 
+        d3.csv("wgi_irena_ssa.csv").then((data) => {
+          let chartsEl = document.getElementById('charts');
+          let chartsG1 = document.getElementById('group1Charts');
+          let chartsG2 = document.getElementById('group2Charts');
+          data.forEach((d, idx) => {
+            // if (idx === 0) return; // ignore the first example country
+            
+            let rowData = {
+              code: d['Code'],
+              country: d['Country'],
+              radar: [[
+                {axis:"Voice and Accountability",value:d["voiceAcc"]},
+                {axis:"Political Stability",value:d["politicalSta"]},
+                {axis:"Government Effectiveness",value:d["govEff"]},
+                {axis:"Regulatory Quality",value:d["regQua"]},
+                {axis:"Rule of Law",value:d["ruleLaw"]},
+                {axis:"Control of Corruption",value:d["controlCor"]},
+              ]],
+              circle: {
+                potential: d["potential"],
+                capacity: d["Capacity"]
+              }
+            }
+            
+            
+            // group 1 low governance
+            if (['SDN', 'ZAR', 'SOM'].includes(d['Code'])) {
+              chartsG1.appendChild(energyChart(rowData));
+            }
+            
+            // group 2 high governance
+            if (['ZAF', 'NAM', 'BWA'].includes(d['Code'])) {
+              chartsG2.appendChild(energyChart(rowData));
+            }
+            
+            chartsEl.appendChild(energyChart(rowData));
+          });
+          
+          
+          // Moving example chart to example section
+          let exampleChart = $('.energyZZZ');
+          exampleChart.attr('style', "transform-origin: left top; transform: scale(2);");
+          $('#exampleChart')
+            .width(exampleChart.width()*2)
+            .height(exampleChart.height()*2)
+            .append(exampleChart);
+        });
+        
+        
+        
+      })
+    </script>
   </body>
 
 </html>

@@ -4,7 +4,8 @@ var energyChart = function(rowData) {
   // this is the parent element that will contain the whole chart.
   let chartDiv = document.createElement('div');
   chartDiv.setAttribute('class', 'chartDiv')
-  
+  chartDiv.classList += ' energy' + rowData.code;
+            
   let data = rowData.radar;
   let circleData = rowData.circle;
   
@@ -267,6 +268,8 @@ var energyChart = function(rowData) {
 	}//wrap	
 	
 	
-	
+	let countryName = document.createElement('div');
+            countryName.innerHTML = '<strong>'+rowData.country+'</strong>';
+            chartDiv.appendChild(countryName);
   return chartDiv;
 }
