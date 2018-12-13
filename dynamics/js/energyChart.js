@@ -5,6 +5,7 @@ var energyChart = function(rowData) {
   let chartDiv = document.createElement('div');
   chartDiv.setAttribute('class', 'chartDiv')
   chartDiv.classList += ' energy' + rowData.code;
+  chartDiv.classList += ' regionALL region' + rowData.region;
             
   let data = rowData.radar;
   let circleData = rowData.circle;
@@ -42,7 +43,7 @@ var energyChart = function(rowData) {
       // Radius of the outermost circle
       radius = Math.min(cfg.w/2, cfg.h/2), 	              
       
-      // Percentage formatting
+      // Decimal formatting
       Format = d3.format('.2f'),
       
       // The width in radians of each "slice"
@@ -112,12 +113,13 @@ var energyChart = function(rowData) {
 				.attr('x', 0)
 				.attr('y', -potlinearScale(Math.sqrt(circleData.potential/Math.PI)))
 				.attr("text-anchor", "middle")
-				.text(circleData.potential + ' TW')
-				.transition().duration(100)
+				.style("opacity",0)
+				.text(circleData.potential + ' terawatts')
+			  .transition().duration(500)
 				.style('opacity', 1);
 	  })
 	  .on('mouseout', function() {
-	    tooltip.transition().duration(100)
+	    tooltip.transition().duration(500)
 				.style("opacity", 0);
 	  });
 
@@ -131,12 +133,13 @@ var energyChart = function(rowData) {
 				.attr('x', 0)
 				.attr('y', -caplinearScale(Math.sqrt(circleData.capacity/Math.PI)))
 				.attr("text-anchor", "middle")
-				.text(circleData.capacity + ' MW')
-				.transition().duration(100)
+				.style("opacity",0)
+				.text(circleData.capacity + ' megawatts')
+				.transition().duration(500)
 				.style('opacity', 1);
 	  })
 	  .on('mouseout', function() {
-	    tooltip.transition().duration(100)
+	    tooltip.transition().duration(500)
 				.style("opacity", 0);
 	  });
 
@@ -195,7 +198,7 @@ var energyChart = function(rowData) {
 		.data(function(d,i) { return d; })
 		.enter().append("circle")
 		.attr("class", "radarInvisibleCircle")
-		.attr("r", cfg.dotRadius*3)
+		.attr("r", cfg.dotRadius*4)
 		.attr("cx", function(d,i){ return rScale(d.value) * Math.cos(angleSlice*i - Math.PI/2); })
 		.attr("cy", function(d,i){ return rScale(d.value) * Math.sin(angleSlice*i - Math.PI/2); })
 		.style("fill", "none")
@@ -208,7 +211,7 @@ var energyChart = function(rowData) {
 				.attr('x', newX)
 				.attr('y', newY)
 				.text(Format(d.value))
-				.transition().duration(100)
+				.transition().duration(300)
 				.style('opacity', 1);
 				
 			// Append the labels at each axis
@@ -216,15 +219,18 @@ var energyChart = function(rowData) {
 				.attr("class", "legend")
 				.style("font-size", cfg.legendSize)
 				.style("fill", cfg.legendColor)
+				.style("opacity", 0)
 				.attr("text-anchor", "middle")
 				.attr("dy", "0.35em")
 				.attr("x", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
 				.attr("y", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice*i - Math.PI/2); })
 				.text(function(d){return d})
+			  .transition().duration(500)
+			  .style("opacity", 1)
 				.call(wrap, cfg.wrapWidth);
 		})
 		.on("mouseout", function(){
-			tooltip.transition().duration(100).style("opacity", 0);
+			tooltip.transition().duration(500).style("opacity", 0);
 			d3.selectAll(".legend").remove();
 		});
   
@@ -234,7 +240,8 @@ var energyChart = function(rowData) {
 		.attr("class", "tooltip")
 		.style("font-size", cfg.tooltipSize)
 		.style("fill", cfg.tooltipColor)
-		.style("opacity", 0);		
+		.style("opacity", 0);	
+		
 	/////////////////////////////////////////////////////////
 	/////////////////// Helper Function /////////////////////
 	/////////////////////////////////////////////////////////
@@ -269,7 +276,8 @@ var energyChart = function(rowData) {
 	
 	
 	let countryName = document.createElement('div');
-            countryName.innerHTML = '<strong>'+rowData.country+'</strong>';
-            chartDiv.appendChild(countryName);
+	countryName.setAttribute('class', 'countryName');
+  countryName.innerHTML = '<strong>'+rowData.country+'</strong>';
+  chartDiv.appendChild(countryName);
   return chartDiv;
 }

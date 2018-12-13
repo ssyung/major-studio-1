@@ -77,8 +77,6 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#legend">Legend</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#visualization">Visualization</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#group1">Group 1</a>
@@ -86,6 +84,9 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#group2">Group 2</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#visualization">Visualization</a>
+
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#sources">Sources</a>
             </li>
@@ -109,7 +110,7 @@
             
             <p>This data visualization envisions Africa's renewable energy potential and capacity through the lens of <strong></strong>SDG 16: Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable and inclusive institutions at all levels.<sup>1</sup></p>
             
-            <p>Accountable institutions and good governance are prerequisites for building sustainable renewable energy infrastructure. History has shown how natural resources wealth, a promising means of building national economies and benefiting public good, are instead corruptly diverted by a select few in positions of power. The resource curse, also known as the paradox of plenty, refers to the paradox that countries with an abundance of natural resources tend to have less economic growth, less democracy, and worse development outcomes than countries with fewer natural resources.</p>
+            <p>Accountable institutions and good governance are prerequisites for building sustainable renewable energy infrastructure. History has shown how natural resource wealth, a promising means of building national economies and benefiting public good, is instead corruptly diverted by a select few in positions of power. The resource curse, also known as the paradox of plenty, refers to the paradox that countries with an abundance of natural resources tend to have less economic growth, less democracy, and worse development outcomes than countries with fewer natural resources.</p>
             
             <p>Africa's vast renewable energy potential holds many possibilities for helping countries realize the sustainable development goals, however, the successful implementation of renewable energy projects rests on the stability and support of local governing bodies.</p>
             
@@ -146,18 +147,7 @@
       </div>
     </section>
 
-    <section id="visualization">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12 mx-auto">
-            <div id="charts"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section id="group1" style="background-color:#faf7f1"; "margin-top: 50px"; "margin-bottom: 50px">
+    <section id="group1">
       <div class="container text-center">
         <div class="row">
           <div class="col-lg-12">
@@ -174,8 +164,7 @@
       </div>
     </section>
     
-    
-    <section id="group2">
+    <section id="group2" style="background-color:#faf7f1">
       <div class="container text-center">
         <div class="row">
           <div class="col-lg-12">
@@ -187,6 +176,24 @@
             <div class="col-lg-8 mx-auto text-left">
               <p> South Africa, Namibia, and Botswana all rank strongly across most of the World Governance Indicators and all have a relative indicator evenness. All three countries have fairly high renewable energy potential, but only South Africa has a meaningul installed renewable energy capacity. No immediate relationships are evident between the individual indicators and lack of renewable energy capacity in Namibia and Botswana, but these countries may prove to be strong candidates for renewable energy projects.</p>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="visualization">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12 mx-auto">
+            <div class="regionFilter text-center">
+              <button type="button" class="btn" data-region="regionALL">ALL</button>
+              <button type="button" class="btn" data-region="regionN">NORTH</button>
+              <button type="button" class="btn" data-region="regionC">CENTRAL</button>
+              <button type="button" class="btn" data-region="regionE">EAST</button>
+              <button type="button" class="btn" data-region="regionW">WEST</button>
+              <button type="button" class="btn" data-region="regionS">SOUTH</button>
+            </div>
+            <div id="charts"></div>
           </div>
         </div>
       </div>
@@ -247,7 +254,6 @@
     		  }
     		});
     		
-    		
     		// empty array collectors for later sections
     		var group1 = [];
     		var group2 = [];
@@ -262,6 +268,7 @@
             let rowData = {
               code: d['Code'],
               country: d['Country'],
+              region: d['REGION'],
               radar: [[
                 {axis:"Voice and Accountability",value:d["voiceAcc"]},
                 {axis:"Political Stability",value:d["politicalSta"]},
@@ -275,7 +282,6 @@
                 capacity: d["Capacity"]
               }
             }
-            
             
             // group 1 low governance
             if (['SDN', 'ZAR', 'SOM'].includes(d['Code'])) {
@@ -293,6 +299,7 @@
           
           // Moving example chart to example section
           let exampleChart = $('.energyZZZ');
+          exampleChart.find('.countryName').remove(); // remove Country label from example chart
           exampleChart.attr('style', "transform-origin: left top; transform: scale(2);");
           $('#exampleChart')
             .width(exampleChart.width()*2)
@@ -300,7 +307,16 @@
             .append(exampleChart);
         });
         
-        
+        // behavior for region filter buttons.
+        $('.regionFilter button').click(function() {
+          $('.regionFilter button').removeClass('btn-dark');
+          $(this).addClass('btn-dark');
+          
+          $('#visualization .chartDiv').css('display', 'none');
+          $('#visualization .'+$(this).data('region')).css('display', 'inline-block');
+          
+        });
+        $('.regionFilter button').first().click();
         
       })
     </script>
