@@ -13,11 +13,17 @@
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/solid.css" integrity="sha384-aj0h5DVQ8jfwc8DA7JiM+Dysv7z+qYrFYZR+Qd/TwnmpDI6UaB3GJRRTdY8jYGS4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/fontawesome.css" integrity="sha384-WK8BzK0mpgOdhCxq86nInFqSWLzR5UAsNg0MGX9aDaIIrFWQ38dGdhwnNCAoXFxL" crossorigin="anonymous">
+
     <!-- Custom styles for this template -->
     <link href="css/scrolling-nav.css" rel="stylesheet">
         
         <!-- Google fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i" rel="stylesheet">
+
+
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
 		<script src="js/energyChart.js"></script>
@@ -34,10 +40,10 @@
     		  text-align: center;
     		}
     		a:link {
-    		  color:#943128;
+    		  color:#909294;
     		}
     		a:visited {
-    		  color:#6c241d;
+    		  color:#bcbdbe;
     		}
     		a:hover {
     		  color:#bc3f32;
@@ -56,6 +62,23 @@
     		}
     		.showNavTitle .navTitle {
     		  display: inline;
+    		}
+    		#visualization button {
+    		  margin-top: 3px;
+    		}
+    		.featureSort button i {
+    		  display: none;
+    		}
+    		.featureSort button.active {
+    		  background: #333;
+    		  color: #fff;
+    		}
+    		.featureSort button.active.asc i.asc {
+    		  display: inline-block;
+    		}
+    		
+    		.featureSort button.active.desc i.desc {
+    		  display: inline-block;
     		}
 		</style>
   </head>
@@ -86,10 +109,6 @@
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#visualization">Visualization</a>
-
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#sources">Sources</a>
-            </li>
           </ul>
         </div>
       </div>
@@ -193,21 +212,17 @@
               <button type="button" class="btn" data-region="regionW">WEST</button>
               <button type="button" class="btn" data-region="regionS">SOUTH</button>
             </div>
+            <div class="featureSort text-center" style="margin-top: 1em;">
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-feature="potential">Potential <i class="asc fas fa-arrow-up"></i><i class="desc fas fa-arrow-down"></i></button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-feature="capacity">Capacity <i class="asc fas fa-arrow-up"></i><i class="desc fas fa-arrow-down"></i></button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-feature="voice">Voice and Accountability <i class="asc fas fa-arrow-up"></i><i class="desc fas fa-arrow-down"></i></button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-feature="political">Political Stability <i class="asc fas fa-arrow-up"></i><i class="desc fas fa-arrow-down"></i></button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-feature="government">Government Effectiveness <i class="asc fas fa-arrow-up"></i><i class="desc fas fa-arrow-down"></i></button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-feature="regulatory">Regulatory Quality <i class="asc fas fa-arrow-up"></i><i class="desc fas fa-arrow-down"></i></button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-feature="rule">Rule of Law <i class="asc fas fa-arrow-up"></i><i class="desc fas fa-arrow-down"></i></button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-feature="corruption">Control of Corruption <i class="asc fas fa-arrow-up"></i><i class="desc fas fa-arrow-down"></i></button>
+            </div>
             <div id="charts"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="sources" style="background-color:#faf7f1">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <h2>Sources</h2>
-            <p><sup>1</sup><a href="https://sustainabledevelopment.un.org/sdg16">Sustainable Development Goal 16</a></p>
-            <p><sup>2</sup><a href="http://info.worldbank.org/governance/wgi/#home">World Governance Indicators</a></p>
-            <p><sup>3</sup><a href="https://www.irena.org/publications/2014/Aug/Estimating-the-Renewable-Energy-Potential-in-Africa-A-GIS-based-approach">IRENA: Estimating Renwable Energy Potential in Africa, August 2014</a></p>
-            <p><sup>4</sup><a href="https://www.irena.org/publications/2018/Mar/Renewable-Capacity-Statistics-2018">IRENA: Renewable Capacity Statistics, March 2018</a></p>
           </div>
         </div>
       </div>
@@ -216,8 +231,23 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">A data visualization project by Stephanie Yung, M.S. Data Visualization // Major Studio I 2018 // The New School</p>
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <p class="m-0 text-center text-white">A data visualization project by Stephanie Yung, M.S. Data Visualization // Major Studio I 2018 // The New School</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-mg-12 mx-auto text-center">
+            <p style="font-size:75%">
+              <sup>1</sup><a href="https://sustainabledevelopment.un.org/sdg16">Sustainable Development Goal 16</a>
+              <sup>2</sup><a href="http://info.worldbank.org/governance/wgi/#home">World Governance Indicators</a>
+              <sup>3</sup><a href="https://www.irena.org/publications/2014/Aug/Estimating-the-Renewable-Energy-Potential-in-Africa-A-GIS-based-approach">IRENA: Estimating Renwable Energy Potential in Africa, August 2014</a>
+              <sup>4</sup><a href="https://www.irena.org/publications/2018/Mar/Renewable-Capacity-Statistics-2018">IRENA: Renewable Capacity Statistics, March 2018</a>
+            </p>
+          </div>
+        </div>
       </div>
+      
       <!-- /.container -->
     </footer>
 
@@ -280,6 +310,17 @@
               circle: {
                 potential: d["potential"],
                 capacity: d["Capacity"]
+              },
+              sort: {
+                potential: d["potential"],
+                capacity: d["Capacity"],
+                voice: d["voiceAcc"],
+                political: d["politicalSta"],
+                government: d["govEff"],
+                regulatory: d["regQua"],
+                rule: d["ruleLaw"],
+                corruption: d["controlCor"],
+
               }
             }
             
@@ -314,10 +355,50 @@
           
           $('#visualization .chartDiv').css('display', 'none');
           $('#visualization .'+$(this).data('region')).css('display', 'inline-block');
-          
         });
         $('.regionFilter button').first().click();
         
+        
+        // sorting buttons
+        $('.featureSort button').click(function() {
+          $('.featureSort button').removeClass('active');
+          let $this = $(this);
+          
+          // what feature to sort the list by
+          let sortBy = $this.data('feature');
+          
+          // this will be -1 or 1 multiplier to reverse the custom sort function
+          let sortDir; 
+          
+          // toggle the sort direction with class names
+          if ($this.hasClass('asc')) {
+            sortDir = -1;
+            $this.removeClass('asc').addClass('desc');
+          } else {
+            sortDir = 1;
+            $this.removeClass('desc').addClass('asc');
+          }
+          $this.addClass('active');
+          
+          let charts = $('#charts .chartDiv');
+          charts.sort((a, b) => {
+            // getting data from elements
+            let aData = $(a).data('sort');
+            let bData = $(b).data('sort');
+            
+            // using Number() to case values as numbers instead of strings
+            if (Number(aData[sortBy]) < Number(bData[sortBy])) {
+              return sortDir * -1;
+            } else if (Number(aData[sortBy]) > Number(bData[sortBy])) {
+              return sortDir * 1;
+            } else {
+              return 0;
+            }
+          })
+          charts.each((idx, chart) => {
+            $('#charts').append(chart);
+          });
+        });
       })
     </script>
   </body>

@@ -6,6 +6,7 @@ var energyChart = function(rowData) {
   chartDiv.setAttribute('class', 'chartDiv')
   chartDiv.classList += ' energy' + rowData.code;
   chartDiv.classList += ' regionALL region' + rowData.region;
+  $(chartDiv).data('sort', rowData.sort);
             
   let data = rowData.radar;
   let circleData = rowData.circle;
