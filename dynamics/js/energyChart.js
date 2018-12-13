@@ -1,4 +1,5 @@
 /* global d3 */
+/* global $ */
 
 var energyChart = function(rowData) {
   // this is the parent element that will contain the whole chart.
@@ -46,6 +47,9 @@ var energyChart = function(rowData) {
       
       // Decimal formatting
       Format = d3.format('.2f'),
+      
+      // comma formatting
+      commaFormat = d3.format(','),
       
       // The width in radians of each "slice"
       angleSlice = Math.PI * 2 / total;
@@ -115,7 +119,7 @@ var energyChart = function(rowData) {
 				.attr('y', -potlinearScale(Math.sqrt(circleData.potential/Math.PI)))
 				.attr("text-anchor", "middle")
 				.style("opacity",0)
-				.text(circleData.potential + ' terawatts')
+				.text(commaFormat(circleData.potential) + ' terawatts')
 			  .transition().duration(500)
 				.style('opacity', 1);
 	  })
@@ -135,7 +139,7 @@ var energyChart = function(rowData) {
 				.attr('y', -caplinearScale(Math.sqrt(circleData.capacity/Math.PI)))
 				.attr("text-anchor", "middle")
 				.style("opacity",0)
-				.text(circleData.capacity + ' megawatts')
+				.text(commaFormat(circleData.capacity) + ' megawatts')
 				.transition().duration(500)
 				.style('opacity', 1);
 	  })
